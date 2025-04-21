@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework Hero</title>
+    <link rel="stylesheet" href="style/styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1>Homework Hero</h1>
+        <p id="userGreeting">Never miss another assignment deadline!</p>
+      </header>
+
+      <div class="add-assignment">
+        <h2>Add New Assignment</h2>
+
+        <form id="assignment-form">
+          <div class="form-group">
+            <label for="title"
+              >Assignment Title: <span id="reqTitle"></span
+            ></label>
+            <input type="text" id="titleInput" />
+          </div>
+
+          <div class="form-group">
+            <label for="course"
+              >Course Code: <span id="reqCourse"></span
+            ></label>
+            <input type="text" id="courseInput" />
+          </div>
+
+          <div class="form-group">
+            <label for="dueDate">Due Date: <span id="reqDate"></span></label>
+            <input type="datetime-local" id="dueDateInput" />
+          </div>
+
+          <div class="form-group">
+            <label for="reminderFreq"
+              >Reminder Frequency: <span id="reqRem"></span
+            ></label>
+            <select id="reminderFreqInput">
+              <option value="daily">Daily - 9AM</option>
+              <option value="weekly">Weekly</option>
+              <option value="urgent">Two hours before deadline</option>
+            </select>
+          </div>
+
+          <button type="suBbmit" id="addBtn">Add Assignment</button>
+        </form>
+      </div>
+
+      <div class="assignments-container">
+        <h2>Your Assignments</h2>
+
+        <div id="assignments-list">
+          <div>
+            <p><strong>Course Code:</strong> HTTP 5122</p>
+            <p><strong>Title:</strong> Sean's Lab</p>
+            <p><strong>Due Date:</strong> 2025-04-18</p>
+            <p><strong>Reminder:</strong> Daily</p>
+            <p id="dueDateText"><strong>Due:</strong> 7 days</p>
+
+            <button id="compBtn">Completed</button>
+            <button id="deleteBtn" >Delete</button>
+          </div>
+
+          <div>
+            <p><strong>Course Code:</strong> HTTP 5121</p>
+            <p><strong>Title:</strong> Joanna's Lab</p>
+            <p><strong>Due Date:</strong> 2025-04-22</p>
+            <p><strong>Reminder:</strong> Weekly</p>
+            <p id="dueDateText"><strong>Due:</strong> 10 days</p>
+
+            <button id="compBtn">Completed</button>
+            <button id="deleteBtn" >Delete</button>
+          </div>
+
+          <div>
+            <p><strong>Course Code:</strong> HTTP 5126</p>
+            <p><strong>Title:</strong> Matthew's Lab</p>
+            <p><strong>Due Date:</strong> 2025-04-22</p>
+            <p><strong>Reminder:</strong> Weekly</p>
+            <p id="dueDateText"><strong>Due:</strong> Tomorrow!!!</p>
+
+            <button id="compBtn">Completed</button>
+            <button id="deleteBtn" >Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script/script.js"></script>
+  </body>
+</html>
