@@ -13,6 +13,20 @@
         <p id="userGreeting">Never miss another assignment deadline!</p>
       </header>
 
+      <div id="usernamePopup" class="usernamePopup">
+        <div class="username-content">
+          <h2>Welcome to Homework Hero! What's your name?</h2>
+          <input type="text" id="usernameInput" placeholder="Enter your name" />
+          <button id="submitUsername">Submit</button>
+        </div>
+      </div>
+
+      <div class="reminderDiv">
+        <h2>Reminders</h2>
+        <div id="reminders"></div>
+
+      </div>
+
       <div class="add-assignment">
         <h2>Add New Assignment</h2>
 
@@ -41,7 +55,7 @@
               >Reminder Frequency: <span id="reqRem"></span
             ></label>
             <select id="reminderFreqInput">
-              <option value="daily">Daily - 9AM</option>
+              <option value="daily">Daily</option>
               <option value="weekly">Weekly</option>
               <option value="urgent">Two hours before deadline</option>
             </select>
@@ -63,7 +77,7 @@
             <p id="dueDateText"><strong>Due:</strong> 7 days</p>
 
             <button id="compBtn">Completed</button>
-            <button id="deleteBtn" >Delete</button>
+            <button id="deleteBtn">Delete</button>
           </div>
 
           <div>
@@ -74,7 +88,7 @@
             <p id="dueDateText"><strong>Due:</strong> 10 days</p>
 
             <button id="compBtn">Completed</button>
-            <button id="deleteBtn" >Delete</button>
+            <button id="deleteBtn">Delete</button>
           </div>
 
           <div>
@@ -85,7 +99,7 @@
             <p id="dueDateText"><strong>Due:</strong> Tomorrow!!!</p>
 
             <button id="compBtn">Completed</button>
-            <button id="deleteBtn" >Delete</button>
+            <button id="deleteBtn">Delete</button>
           </div>
         </div>
       </div>
