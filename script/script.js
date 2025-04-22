@@ -14,19 +14,30 @@ let storedUserName = localStorage.getItem("userName") || "";
 window.onload = pageReady;
 
 function pageReady() {
-  // Prompt for username if not stored already
+  // Check if userName is not already stored in localStorage
   if (!storedUserName) {
-    storedUserName = prompt(
-      "Welcome to Homework Hero! What's your name?",
-      "Student"
-    ).trim();
-    localStorage.setItem("userName", storedUserName);
-  }
+    // Show popup to collect username
+    const modal = document.getElementById("usernamePopup");
+    const submitBtn = document.getElementById("submitUsername");
 
-  // Set personalized greeting
-  document.getElementById(
-    "userGreeting"
-  ).innerHTML = `Hello ${storedUserName}, Never miss another assignment deadline!`;
+    modal.style.display = "block";
+
+    // Submit event
+    submitBtn.addEventListener("click", () => {
+      storedUserName = document.getElementById("usernameInput").value.trim();
+      if (storedUserName) {
+        localStorage.setItem("userName", storedUserName);
+        modal.style.display = "none";
+        document.getElementById(
+          "userGreeting"
+        ).innerHTML = `Hello ${storedUserName}, Never miss another assignment deadline!`;
+      }
+    });
+  } else {
+    document.getElementById(
+      "userGreeting"
+    ).innerHTML = `Hello ${storedUserName}, Never miss another assignment deadline!`;
+  }
 
   // Display existing assignments if any
   if (assignments.length >= 1) {
@@ -34,12 +45,14 @@ function pageReady() {
   }
 
   // Check reminders immediately and then every minute
+  showSavedReminders();
   checkReminders();
 
   // Event listener for adding a new assignment
   addAssBtn.addEventListener("click", addAssignment);
 
   // Periodically refresh reminders and list
+
   setInterval(checkReminders, 60000); // every 60 seconds
   setInterval(displayAssignments, 60000); // update countdowns live
 }
@@ -118,6 +131,7 @@ function displayAssignments() {
   if (assignments.length === 0) {
     assignmentsList.innerHTML =
       "<p>No assignments yet. Add your first assignment above!</p>";
+    document.getElementById("reminders").innerHTML = "";
     return;
   }
 
@@ -193,6 +207,7 @@ function displayAssignments() {
       assignments[index].completed = !assignments[index].completed;
       saveAssignments();
       displayAssignments();
+      showSavedReminders();
     });
   });
 
@@ -203,6 +218,7 @@ function displayAssignments() {
       assignments.splice(index, 1);
       saveAssignments();
       displayAssignments();
+      showSavedReminders();
     });
   });
 }
@@ -230,9 +246,23 @@ function checkReminders() {
       : Infinity;
 
     const remindUser = (message) => {
-      alert(message);
-      assignment.lastReminded = new Date();
-      saveAssignments();
+      if (!assignment.reminderMessages.includes(message)) {
+        var reminderDiv = document.createElement("div");
+        reminderDiv.classList.add("reminder");
+        reminderDiv.textContent = message;
+
+        // Append the new reminder to the reminders"section
+        document.getElementById("reminders").appendChild(reminderDiv);
+
+        // Update the last reminded time for the assignment and the message
+        assignment.lastReminded = new Date();
+        if (!assignment.reminderMessages) {
+          assignment.reminderMessages = [];
+        }
+        assignment.reminderMessages.push(message);
+
+        saveAssignments();
+      }
     };
 
     // Daily reminder: once every 24 hours before due date
@@ -300,6 +330,34 @@ function checkReminders() {
             }
           )}`
         );
+      }
+    }
+  });
+  showSavedReminders();
+}
+
+function showSavedReminders() {
+  const remindersDiv = document.getElementById("reminders");
+  remindersDiv.innerHTML = "";
+
+  assignments.forEach((assignment) => {
+    if (
+      !assignment.completed &&
+      assignment.reminderMessages &&
+      assignment.reminderMessages.length > 0
+    ) {
+      // Check if the assignment is past due
+      const now = new Date();
+      const dueDate = new Date(assignment.dueDate);
+
+      // Only show reminders for assignments that are not past due
+      if (dueDate > now) {
+        assignment.reminderMessages.forEach((msg) => {
+          const reminderDiv = document.createElement("div");
+          reminderDiv.classList.add("reminder");
+          reminderDiv.textContent = msg;
+          remindersDiv.appendChild(reminderDiv);
+        });
       }
     }
   });
