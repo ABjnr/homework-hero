@@ -43,13 +43,16 @@ Homework Hero is a simple, browser-based assignment tracker and reminder tool fo
    - Open `index.html` in your web browser.
    - No server or build step required.
 
+```markdown
 ## File Structure
+
+```
 .
 ├── index.html
 ├── script/
-│ └── script.js
+│   └── script.js
 └── style/
-└── styles.css
+    └── styles.css
 
 
 ## Customization
